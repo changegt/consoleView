@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>consoleView view html</title>
+	<script type="text/javascript" src="http://t.10jqka.com.cn/js/sea-modules/jquery/jquery/1.11.0/jquery-debug.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var ws = new WebSocket("ws://localhost:3100");
+	    ws.onopen = function (e) {
+	        console.log('Connection to server opened');
+	    }
+
+     	ws.onmessage = function(json){
+     		$('body').append('<div>'+json.data+'</div>');
+     	};  
+   
+	    function sendMessage() {
+	        ws.send('111');
+	    }
+
+	</script>
+</body>
+</html>

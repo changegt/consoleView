@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>consoleView console html</title>
+	<script type="text/javascript" src="http://t.10jqka.com.cn/js/sea-modules/jquery/jquery/1.11.0/jquery-debug.js"></script>
+	<style>
+		.consoleBox{width: 400px; height: 300px;}
+	</style>
+</head>
+<body>
+	<textarea name="" id="jsConsoleBox" class="consoleBox" data-type="js"></textarea><br>
+	<button class="btn" data-type="js">发送js</button><br><br><br><br>
+
+	<textarea name="" id="cssConsoleBox" class="consoleBox" data-type="css"></textarea><br>
+	<button class="btn" data-type="css">发送css</button>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				var val = $('.consoleBox[data-type="'+$(this).attr('data-type')+'"]').val();
+				if(!!val){
+					consoleAjax(val, $(this).attr('data-type'));
+				}
+			})
+		});
+
+		function consoleAjax(str, type){
+			var oData = {
+				console: str,
+				type: type
+			};
+			$.ajax({
+				url: '//10.10.4.24:3000/send',
+				type: 'post',
+				dataType: 'json',
+				data: oData,
+				success: function(json){
+					console.log(json);
+				},
+				complete: function(){
+			
+				}
+			})
+		}
+	</script>
+</body>
+</html>
